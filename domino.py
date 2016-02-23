@@ -8,10 +8,10 @@ class Domino(object):
         print "Face A : " + str(self.faceA) + " Face B : " + str(self.faceB)
 
     def valeur(self):
-        total = self.faceA + self.faceB
-        print total
+        total = int(self.faceA + self.faceB)
+        return total
 
-if __name__ == "__main__":
-    firstDomino = Domino(2,3)
-    firstDomino.affiche_points()
-    firstDomino.valeur()
+#if __name__ == "__main__":
+#    firstDomino = Domino(2,3)
+#    firstDomino.affiche_points()
+#    firstDomino.valeur()
