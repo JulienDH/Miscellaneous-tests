@@ -2,11 +2,11 @@
 
 class Voiture():
 
-    def __init__(self, marque = 'Ford', couleur = 'rouge', nom = 'personne', vitesse = 0):
+    def __init__(self, marque = 'Ford', couleur = 'rouge'):
         self.marque = str(marque)
         self.couleur = str(couleur)
-        self.nom = str(nom)
-        self.vitesse = int(0)
+        self.nom = 'personne'
+        self.vitesse = 0
 
     def choix_conducteur(self, nom = 'personne'):
         self.nom = str(nom)
