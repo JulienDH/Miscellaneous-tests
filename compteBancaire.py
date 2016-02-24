@@ -1,18 +1,16 @@
 class CompteBancaire():
 
-    def __init__ (self, name, solde):
+    def __init__ (self, name = "Dupont", solde = 1000):
         self.name = str(name)
         self.solde = int(solde)
 
-    def depot(self, somme):
+    def depot(self, somme = 0):
         self.depot = int(somme)
-        self.nouveau_solde = self.solde + self.depot
+        self.solde = (self.solde + self.depot)
 
-    def retrait(self, somme):
+    def retrait(self, somme = 0):
         self.retrait = int(somme)
-        self.nouveau_solde = self.solde - self.retrait
+        self.solde = (self.solde - self.retrait)
 
     def affiche(self):
-        #self.solde_final = self.solde + self.solde_apres_depot - self.solde_apres_retrait
-
-        print "Le solde du compte bancaire de " + str(self.name) +  " est de " + str(self.nouveau_solde) + " euros."
+        print "Le solde du compte bancaire de " + str(self.name) +  " est de " + str(self.solde) + " euros."
