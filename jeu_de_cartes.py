@@ -5,14 +5,12 @@ import sys
 
 class JeuDeCartes():
 
-    joueur1_points = 0
-    joueur2_points = 0
-
     def __init__(self):
         self.liste = []
         for i in range(0,4):
             for j in range(2,15):
                 self.liste.append((j,i))
+
 
     def nom_carte(self, (numero,couleur)):
         self.numero = int(numero)
@@ -36,7 +34,8 @@ class JeuDeCartes():
         elif self.numero == 14:
             self.numero = str("As")
 
-        print str(self.numero) + " de " + self.couleur
+        return str(self.numero) + " de " + self.couleur
+
 
     def battre(self):
         for i in self.liste:
@@ -46,49 +45,58 @@ class JeuDeCartes():
             self.liste[a] = self.liste[b]
             self.liste[b] = temp
 
+
     def tirer(self):
         if (len(self.liste) == 0):
-            print "Jeu terminé !"
+            return None
         else:
-            #self.carte = self.nom_carte(self.liste[0])
             self.indice = self.liste[0]
             self.liste.remove(self.liste[0])
             return self.indice
 
 
 
+def joueur_gagnant(carte1, carte2, joueur1_points, joueur2_points):
+    num1 = carte1[0]
+    num2 = carte2[0]
+    joueur1_points = joueur1_points
+    joueur2_points = joueur2_points
+
+    if (num1 > num2):
+        joueur1_points += 1
+        print "Joueur 1 gagne cette manche. Il a mtn " + str(joueur1_points) + " points"
+    elif (num1 < num2):
+        joueur2_points += 1
+        print "Joueur 2 gagne cette manche. Il a mtn " + str(joueur2_points) + " points"
+    elif (num1 == num2):
+        print "Match nul pour cette manche."
+    if joueur1_points == 26:
+        print "\nFin de partie anticipée !\nLe joueur 1 a gagné avec " + str(joueur1_points) + " points.\nLe joueur 2 avait " + str(joueur2_points) + " points\n"
+        sys.exit()
+    if joueur2_points == 26:
+        print "\nFin de partie anticipée !\nLe joueur 2 a gagné avec " + str(joueur2_points) + " points.\nLe joueur 1 avait " + str(joueur1_points) + " points\n"
+        sys.exit()
+    return joueur1_points, joueur2_points
+
+
+
 if __name__ == "__main__":
 
-    def gagnant(carte1,carte2):
-        num1 = carte1[0]
-        num2 = carte2[0]
-        if (num1 > num2):
-            print "Joueur 1 gagne cette manche. Il a mtn " + str(joueur1_points) + " points"
-            joueur1_points = joueur1_points + 1
-        elif (num1 < num2):
-            joueur2_points = joueur2_points + 1
-            print "Joueur 2 gagne cette manche. Il a mtn " + str(joueur1_points) + " points"
-        elif (num1 == num2):
-            print "Match nul pour cette manche."
-        if joueur1_points > 27:
-            print "Fin de la partie. Le joueur1 a gagné avec " + str(joueur1_points) + " points"
-            sys.exit()
-        if joueur2_points > 27:
-            print "Fin de la partie. Le joueur2 a gagné" + str(joueur2_points) + " points"
-            sys.exit()
-
-    joueur1_points = 0
-    joueur2_points = 0
     joueur1 = JeuDeCartes()
     joueur1.battre()
     joueur2 = JeuDeCartes()
     joueur2.battre()
+    joueur1_points = 0
+    joueur2_points = 0
 
-    for i in range(2):
+    for i in range(53):
         carte1 = joueur1.tirer()
-        num1 = carte1[0]
         carte2 = joueur2.tirer()
+        if carte1 == None or carte2 == None:
+            print "\nJeu terminé !\nLe joueur 1 possède " + str(joueur1_points) + "points.\nLe joueur 2 possède " + str(joueur2_points) + "points\n"
+            sys.exit(1)
+        num1 = carte1[0]
         num2 = carte2[0]
-        print ("Le joueur 1 vient de tirer un :"), joueur1.nom_carte(carte1)
-        print ("Le joueur 2 vient de tirer un :"), joueur2.nom_carte(carte2)
-        gagnant(carte1,carte2);
+        print " Le joueur 1 vient de tirer un : " + joueur1.nom_carte(carte1)
+        print " Le joueur 2 vient de tirer un : " + joueur2.nom_carte(carte2)
+        joueur1_points, joueur2_points = joueur_gagnant(carte1, carte2, joueur1_points, joueur2_points)
