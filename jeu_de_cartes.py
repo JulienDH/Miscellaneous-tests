@@ -43,14 +43,21 @@ class JeuDeCartes():
             self.liste[b] = temp
 
     def tirer(self):
-        for element in self.liste:
-            self.nom_carte(element[0],element[1])
-            self.liste.remove(element)
-        if len(self.liste) == 0:
+        if (len(self.liste) == 0):
             print "Jeu terminé !"
+        else:
+            self.carte = self.liste[0]
+            self.nom_carte(self.carte[0],self.carte[1])
+            self.liste.remove(self.carte)
 
-    def afficher(self):
-        print self.liste
 
-    def trier(self):
-        self.liste.sort()
+if __name__ == "__main__":
+
+    joueur1 = JeuDeCartes()
+    joueur1.battre()
+    joueur2 = JeuDeCartes()
+    joueur2.battre()
+
+    for i in range(52):
+        print "Le joueur 1 vient de tirer un :" + joueur1.tirer()
+        print "Le joueur 1 vient de tirer un :" + joueur2.tirer()
