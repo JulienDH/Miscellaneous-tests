@@ -44,12 +44,13 @@ class JeuDeCartes():
 
     def tirer(self):
         for element in self.liste:
-            if element == 'none' :
-                print "Jeu terminé"
-            else :
-                return self.nom_carte(element[0],element[1])
-                self.liste.remove(element)
-
+            self.nom_carte(element[0],element[1])
+            self.liste.remove(element)
+        if len(self.liste) == 0:
+            print "Jeu terminé !"
 
     def afficher(self):
         print self.liste
+
+    def trier(self):
+        self.liste.sort()
