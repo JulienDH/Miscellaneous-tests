@@ -10,8 +10,3 @@ class Domino(object):
     def valeur(self):
         total = int(self.faceA + self.faceB)
         return total
-
-#if __name__ == "__main__":
-#    firstDomino = Domino(2,3)
-#    firstDomino.affiche_points()
-#    firstDomino.valeur()
